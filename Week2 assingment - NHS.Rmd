@@ -1,0 +1,52 @@
+---
+title: "week2 assignment - NHS"
+author: "hyeonsu Noh"
+date: '2022-08-08'
+output: html_document
+---
+### Introduction
+Create a web page using R Markdown that features a map created with Leaflet. 
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity! 
+
+### Review Criteria
+The rubric contains the following two questions:
+
+1. Does the web page feature a date and is this date less than two months before the date that you're grading this assignment?
+
+2. Does the web page feature an interactive map that appears to have been created with Leaflet?
+
+### Submission
+
+```{r}
+library(leaflet)
+library(knitr)
+library(dplyr)
+```
+
+```{r}
+My_village <- leaflet() %>% 
+  addTiles() %>%
+  addMarkers(lat=37.5005, lng=127.0066, popup="나의 학교") %>%
+  addMarkers(lat=37.4838, lng=126.9808, popup="낯선한식 븟다") %>%
+  addMarkers(lat=37.4809, lng=126.9844, popup="방배동 쌀국수") %>%
+  addMarkers(lat=37.4796, lng=126.9804, popup="고흥이모네 전집") %>%
+  addMarkers(lat=37.4819, lng=126.9806, popup="스시세이") %>%
+  addMarkers(lat=37.4816, lng=126.981, popup="이수 정육식당") %>%
+  addMarkers(lat=37.4861 ,lng=126.981, popup="낙성곱창")
+
+My_village
+```
+
+
+```{r}
+df <- data.frame(lat=runif(500, min = 36.50, max = 37.50),
+                 lng=runif(500, min = 126.50, max = 127.50))
+
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions())
+```
